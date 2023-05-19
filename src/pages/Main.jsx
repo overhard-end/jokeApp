@@ -18,7 +18,7 @@ export const Main = () => {
   const [jokeType, setJokeType] = React.useState('any');
   const [jokeLang, setJokeLang] = React.useState();
   const [jokeOption, setjokeOption] = React.useState('twopart');
-  const [error, setError] = React.useState();
+  const [error, setError] = React.useState(false);
 
   const [joke, setJoke] = React.useState();
 
@@ -31,8 +31,8 @@ export const Main = () => {
       params: { format: 'json', lang: jokeLang, type: jokeOption },
     });
     if (response.data.error) return setError(response.data.message);
+    setError(false);
     setJoke(response.data);
-    console.log(response.data);
   }
   useEffect(() => {
     getJoke();
