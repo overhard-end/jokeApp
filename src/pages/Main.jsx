@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Row, Text, Button, Navbar } from '@nextui-org/react';
+import { Container, Row, Text, Button, Navbar, Switch } from '@nextui-org/react';
 import { MainText } from '../components/mainText';
 import { LoadingElement } from '../components/loading';
 import { api } from '../axios';
 import { DropDownArea } from '../components/dropDownArea';
+import { SwitchArea } from '../components/switchArea';
 
 export const Main = () => {
   const [error, setError] = useState(false);
@@ -40,43 +41,46 @@ export const Main = () => {
         </Navbar.Brand>
         <Navbar.Toggle autoFocus={true} showIn="xs" aria-label="toggle navigation" />
         <Navbar.Content hideIn="xs">
+          <SwitchArea />
           <DropDownArea getJokeParams={getJokeParams} />
         </Navbar.Content>
         <Navbar.Collapse>
           <DropDownArea getJokeParams={getJokeParams} />
         </Navbar.Collapse>
       </Navbar>
-      <Container
-        css={{ paddingTop: '50px', marginBottom: '30px', position: 'relative' }}
-        md
-        justify="center"
-        display="flex">
-        {error ? (
-          <Text
-            blockquote
-            css={{
-              color: '$mycolor',
-              fontSize: '25px',
-              padding: '$2 $4',
-            }}>
-            {error}
-          </Text>
-        ) : isLoading ? (
-          <LoadingElement />
-        ) : joke ? (
-          <MainText joke={joke} />
-        ) : (
-          ''
-        )}
-        <Row justify="center" css={{ position: 'fixed', bottom: '30%' }}>
-          <Button
-            css={{ color: '$black', fontWeight: '$bold' }}
-            color="primary"
-            onPress={() => getJoke()}>
-            GET NEW JOKE
-          </Button>
-        </Row>
-      </Container>
+      {isLoading ? (
+        <LoadingElement />
+      ) : (
+        <Container
+          css={{ paddingTop: '50px', marginBottom: '30px', position: 'relative' }}
+          md
+          justify="center"
+          display="flex">
+          {error ? (
+            <Text
+              blockquote
+              css={{
+                color: '$mycolor',
+                fontSize: '25px',
+                padding: '$2 $4',
+              }}>
+              {error}
+            </Text>
+          ) : joke ? (
+            <MainText joke={joke} />
+          ) : (
+            ''
+          )}
+          <Row justify="center" css={{ position: 'fixed', bottom: '30%' }}>
+            <Button
+              css={{ color: '$black', fontWeight: '$bold' }}
+              color="primary"
+              onPress={() => getJoke()}>
+              GET NEW JOKE
+            </Button>
+          </Row>
+        </Container>
+      )}
     </>
   );
 };
