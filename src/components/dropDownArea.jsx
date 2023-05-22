@@ -48,16 +48,12 @@ export const DropDownArea = ({ getJokeParams }) => {
         break;
     }
   };
-  return (
-    <Row gap={0}>
-      {['lang', 'opt', 'type'].map((type) => (
-        <DropDown
-          key={type}
-          allItems={getItems(type, fetchedParams)}
-          handleParams={handleParams}
-          type={type}
-        />
-      ))}
-    </Row>
-  );
+  return ['lang', 'opt', 'type'].map((type) => (
+    <DropDown
+      key={type}
+      allItems={getItems(type, fetchedParams)}
+      handleParams={handleParams}
+      type={type}
+    />
+  ));
 };

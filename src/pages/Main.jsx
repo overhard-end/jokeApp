@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Row, Text, Button, Navbar, Switch } from '@nextui-org/react';
+import { Container, Row, Text, Button, Navbar, Switch, Col } from '@nextui-org/react';
 import { MainText } from '../components/mainText';
 import { LoadingElement } from '../components/loading';
 import { api } from '../axios';
@@ -42,10 +42,17 @@ export const Main = () => {
         <Navbar.Toggle autoFocus={true} showIn="xs" aria-label="toggle navigation" />
         <Navbar.Content hideIn="xs">
           <SwitchArea />
-          <DropDownArea getJokeParams={getJokeParams} />
+          <Row gap={0}>
+            <DropDownArea getJokeParams={getJokeParams} />
+          </Row>
         </Navbar.Content>
         <Navbar.Collapse>
-          <DropDownArea getJokeParams={getJokeParams} />
+          <Navbar.CollapseItem>
+            <Col gap={0}>
+              <DropDownArea getJokeParams={getJokeParams} />
+            </Col>
+            <SwitchArea />
+          </Navbar.CollapseItem>
         </Navbar.Collapse>
       </Navbar>
       {isLoading ? (
